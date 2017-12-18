@@ -1,0 +1,21 @@
+{
+  "name": "my-app",
+  "description": "trying for qr code",
+  "main": "src/index.html",
+  "authors": [
+    "Sundar GSV <gsundar93@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "try"
+  ],
+  "homepage": "https://github.com/EddyVerbruggen/nativescript-fingerprint-auth",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
