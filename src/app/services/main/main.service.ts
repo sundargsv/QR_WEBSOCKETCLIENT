@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
 import { WebsocketService } from '../websocket/websocket.service';
 
-const WEBSOCKET_PROD_URL = 'ws://phx-uim-platform-master.ctnr.ctl.io/ws/uim/authenticate';
+const WEBSOCKET_PROD_URL = '';
 const WEBSOCKET_STAGING_URL = 'ws://echo.websocket.org/';
 
 export interface Message {
