@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
 import { WebsocketService } from '../websocket/websocket.service';
 
-const WEBSOCKET_PROD_URL = 'ws://phx-uim-platform-master.ctnr.ctl.io/uim/websocket/authenticate';
+const WEBSOCKET_PROD_URL = 'ws://phx-uim-platform-master.ctnr.ctl.io/ws/uim/authenticate';
 const WEBSOCKET_STAGING_URL = 'ws://echo.websocket.org/';
 
 export interface Message {
 	websocketId: string,
   authenticated: boolean,
-  sender: string,
-  index: number
+  accessToken?: string,
+  sender: string
 }
 
 @Injectable()
@@ -21,19 +21,20 @@ export class MainService {
     // console.log('Im in main service');
 
 		this.messages = <Subject<Message>>wsService
-			.connect(WEBSOCKET_STAGING_URL)
+			.connect(WEBSOCKET_PROD_URL)
 			.map((response: MessageEvent): Message => {
         console.log('Response success');
         let data = JSON.parse(response.data);
         // MARK : The below is the dummpy values
         // assigned for testing the response
-        data.websocketId = '5a35f7147d5cd03e60987c33';
-        data.authenticated = true;
+        if(!data.accessToken){
+          data.accessToken = "";
+        }
 				return {
 					websocketId: data.websocketId,
           authenticated: data.authenticated,
-          sender: data.sender,
-          index: data.index
+          accessToken: data.accessToken,
+          sender: data.sender
 				}
 			});
 	}

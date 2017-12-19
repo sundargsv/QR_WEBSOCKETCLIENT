@@ -14,14 +14,22 @@ export class AppComponent {
   title = 'app';
   // Setting defaults for QRCode generation
   elementType: 'url' | 'canvas' | 'img' = 'url';
-  value: string = 'http://www.sundargsv.me';
+  value: string = '';
   webSocketId_added: boolean = false;
+  accessToken: string = '';
+
   constructor(private mainService: MainService) {
     mainService.messages.subscribe(msg => {
-      console.log('Response from websocket: ' + msg.websocketId);
+      console.log('Response from websocket server: ');
+      console.log('Websocket ID :' + msg.websocketId);
+      console.log('Access Token :' + msg.accessToken);
+      console.log('Authenticated :' + msg.authenticated);
       this.value = msg.websocketId;
-      this.webSocketId_added = msg.authenticated;
-
+      if(this.value != ''){
+        this.webSocketId_added = true;
+      }
+      //MARK : Cache this accessToken for future login
+      this.accessToken = msg.accessToken;
     });
   }
 
